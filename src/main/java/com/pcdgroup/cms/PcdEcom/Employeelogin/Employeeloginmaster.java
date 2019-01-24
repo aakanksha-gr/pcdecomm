@@ -13,7 +13,7 @@ public class Employeeloginmaster {
 
 	@Id
 	@Column(name="employeeliginid")
-	private Integer employeeliginid; 
+	private Integer employeeliginid;  
 	
 	@Column(name="empid")
 	private Integer empid; 

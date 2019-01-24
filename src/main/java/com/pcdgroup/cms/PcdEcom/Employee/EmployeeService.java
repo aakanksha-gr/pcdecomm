@@ -6,7 +6,7 @@ import com.pcdgroup.cms.PcdEcom.Employeelogin.Employeeloginmaster;
 
 public interface EmployeeService {
 
-	public String employeeLogin(Employeemaster employeemaster, Employeeloginmaster employeeloginmaster);
+	public Employeemaster employeeLogin(Employeemaster employeemaster, Employeeloginmaster employeeloginmaster);
 	public String createEmployee(Employeemaster employeemaster);
 	public Employeemaster getEmployee(Integer employeeid);
 	public List<Employeemaster> getAllEmploiees();

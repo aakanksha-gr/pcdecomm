@@ -18,7 +18,7 @@ public class EmployeeController {
 	private EmployeeServiceImpl employeeServiceImpl;
 	
 	@RequestMapping(method=RequestMethod.POST, value="/employeeLogin")
-	public String employeeLogin(@RequestBody Employeemaster employeemaster, Employeeloginmaster employeeloginmaster) {
+	public Employeemaster employeeLogin(@RequestBody Employeemaster employeemaster, Employeeloginmaster employeeloginmaster) {
 	
 		return employeeServiceImpl.employeeLogin(employeemaster, employeeloginmaster);
 	

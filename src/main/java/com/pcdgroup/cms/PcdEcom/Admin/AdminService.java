@@ -9,6 +9,6 @@ public interface AdminService {
 	public List<Adminmaster> getAllAdmins();
 	public String deleteAdmin(Integer adminid);
 	public String updateAdmin(Adminmaster adminmaster, Integer adminid);
-	public String adminLogin(Adminmaster adminmaster);
+	public Adminmaster adminLogin(Adminmaster adminmaster);
 	
 }

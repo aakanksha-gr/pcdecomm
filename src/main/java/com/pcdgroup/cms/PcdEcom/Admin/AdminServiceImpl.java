@@ -15,19 +15,15 @@ public class AdminServiceImpl implements AdminService {
 	
 	Passwordsecurity passwordsecurity;
 	
-	public String adminLogin(Adminmaster adminmaster) {
+	public Adminmaster adminLogin(Adminmaster adminmaster) {
 		
 		try {
-			
+		
 			passwordsecurity = new Passwordsecurity();
 			
 			if(null != adminRepository.checkAdminLogin(adminmaster.getAdminemail(), passwordsecurity.encrypt(adminmaster.getAdminpassword()))) {
 				
-				return "login success..!";
-				
-			} else {
-				
-				return "Incorrect username or password..!";
+				return adminRepository.checkAdminLogin(adminmaster.getAdminemail(), passwordsecurity.encrypt(adminmaster.getAdminpassword()));
 				
 			}
 			
@@ -44,6 +40,8 @@ public class AdminServiceImpl implements AdminService {
 	public String createAdmin(Adminmaster adminmaster) {
 		
 		try {
+			
+			passwordsecurity = new Passwordsecurity();
 			
 			System.out.println(adminmaster.getAdminemail());
 			

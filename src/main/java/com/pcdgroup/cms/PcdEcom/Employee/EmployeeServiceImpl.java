@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	Passwordsecurity passwordsecurity;
 	
 	@Override
-	public String employeeLogin(Employeemaster employeemaster, Employeeloginmaster employeeloginmaster) {
+	public Employeemaster employeeLogin(Employeemaster employeemaster, Employeeloginmaster employeeloginmaster) {
 		
 		Calendar calobj = Calendar.getInstance();
 		
@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			
 			passwordsecurity = new Passwordsecurity();
 			
-			Integer emplid = employeeRepository.checkEmployeeLogin(employeemaster.getEmployeeemail(), passwordsecurity.encrypt(employeemaster.getEmployeepassword()));
+			Employeemaster emplid = employeeRepository.checkEmployeeLogin(employeemaster.getEmployeeemail(), passwordsecurity.encrypt(employeemaster.getEmployeepassword()));
 			
 			if(null != emplid) {
 				
@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 					
 				}
 				
-				employeeloginmaster.setEmpid(emplid);
+				employeeloginmaster.setEmpid(emplid.getEmployeeid());
 				
 				employeeloginmaster.setServicestartingtime(calobj.getTime());
 				
@@ -52,13 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 				
 				employeeloginRepository.save(employeeloginmaster);
 				
-				return "Login success..!";
+				return emplid;
 			
-			} else {
-				
-				return "Incorrect Username or password..!";
-				
-			}
+			} 
 			
 		} catch (Exception e) {
 			

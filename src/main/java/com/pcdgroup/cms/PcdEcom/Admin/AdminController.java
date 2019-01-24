@@ -16,7 +16,7 @@ public class AdminController {
 	AdminServiceImpl adminServiceImpl;
 	
 	@RequestMapping(method=RequestMethod.POST, value="/adminLogin")
-	public String adminLogin(@RequestBody Adminmaster adminmaster) {
+	public Adminmaster adminLogin(@RequestBody Adminmaster adminmaster) {
 		
 		return adminServiceImpl.adminLogin(adminmaster);
 		
