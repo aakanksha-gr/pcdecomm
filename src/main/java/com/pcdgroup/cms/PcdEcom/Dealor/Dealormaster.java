@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Dealormaster {
 
 	@Id
-	@Column(name="dealorid")
+	@Column(name="dealorid") 
 	private Integer dealorid; 
 	
 	@Column(name="dealorfname")
