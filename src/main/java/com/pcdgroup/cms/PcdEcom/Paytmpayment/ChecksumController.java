@@ -1,0 +1,23 @@
+package com.pcdgroup.cms.PcdEcom.Paytmpayment;
+
+import java.util.TreeMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ChecksumController {
+
+	@Autowired
+	ChecksumGeneration checksumGeneration;
+	
+	/*@RequestMapping(method=RequestMethod.POST, value="/generateChecksum")
+	public TreeMap<String, String> generateChecksum(@RequestBody ChecksumGenerationBean checksumGenerationBean) {
+		//return checksumGeneration.GenerateChecksum(checksumGenerationBean); 
+		
+	}*/
+	
+}
