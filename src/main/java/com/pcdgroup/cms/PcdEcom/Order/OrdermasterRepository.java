@@ -1,5 +1,6 @@
 package com.pcdgroup.cms.PcdEcom.Order;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -56,5 +57,17 @@ public interface OrdermasterRepository extends CrudRepository<Ordermaster, Integ
 	@Query(nativeQuery = true, value = "SELECT orderid, orderdatetime, dpid, dsid, ordercategory, orderstatus, ppid, psid, rid, totalprice, totalproducts, vendorid, orderbrand, ordertype from  ordermaster"
 			+ " where month(orderdatetime) = ?1 ORDER BY orderid ASC LIMIT 10")
 	List<Ordermaster> getTotalOrdersInSingleMonth(String month);
+	
+	@Query(nativeQuery = true, value = "SELECT dartproductinventorytid from dartproductinventorymaster where dartproductinventorypid = ?1")
+	Integer getDartProductInventoryTaskId(Integer productid);
+	
+	@Query(nativeQuery = true, value = "SELECT pcdproducttaskid from pcdproducttaskmaster where pcdproducttaskid = ?1")
+	Integer getPcdProductInventoryTaskId(Integer productid);
+	
+	@Query(nativeQuery = true, value = "SELECT pcdproductinventorytid FROM pcdproductinventorymaster where pcdproductinventorypid = ?1")
+	Integer getProductInventoryTaskId(Integer productid);
+	
+	@Query(nativeQuery = true, value = "SELECT sum(totalprice) from ordermaster where orderdatetime = ?1")
+	String getTotalOrderAmount(Date datetime);
 	
 }

@@ -7,8 +7,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcdgroup.cms.PcdEcom.Bill.BillServiceImpl;
+import com.pcdgroup.cms.PcdEcom.Bill.Billmaster;
+import com.pcdgroup.cms.PcdEcom.DartProduct.DartProductRepository;
+import com.pcdgroup.cms.PcdEcom.DartProduct.DartProductServiceImpl;
+import com.pcdgroup.cms.PcdEcom.DartProduct.Dartproductmaster;
+import com.pcdgroup.cms.PcdEcom.Inventory.InventoryRepository;
+import com.pcdgroup.cms.PcdEcom.Inventory.InventoryServiceImpl;
+import com.pcdgroup.cms.PcdEcom.Inventory.Inventorymaster;
 import com.pcdgroup.cms.PcdEcom.Order.Ordermaster;
 import com.pcdgroup.cms.PcdEcom.Order.OrdermasterRepository;
+import com.pcdgroup.cms.PcdEcom.PcdProduct.ProductRepository;
+import com.pcdgroup.cms.PcdEcom.PcdProduct.ProductServiceImpl;
+import com.pcdgroup.cms.PcdEcom.PcdProduct.Productmaster;
+
+
 
 @Service
 public class AddtocartServiceImpl implements AddtocartService {
@@ -20,6 +33,35 @@ public class AddtocartServiceImpl implements AddtocartService {
 	OrdermasterRepository ordermasterRepository;
 	
 	Ordermaster ordermaster;
+	
+	Inventorymaster inventorymaster;
+	
+	@Autowired
+	InventoryRepository inventoryRepository;
+	
+	@Autowired
+	InventoryServiceImpl inventoryServiceImpl;
+	
+	Dartproductmaster dartproductmaster;
+	
+	@Autowired
+	DartProductRepository dartProductRepository;
+	
+	@Autowired
+	DartProductServiceImpl dartProductServiceImpl ;
+	
+	Productmaster productmaster;
+	
+	@Autowired
+	ProductServiceImpl productServiceImpl; 
+	
+	@Autowired
+	ProductRepository productRepository;
+	
+	Billmaster billmaster;
+	
+	@Autowired
+	BillServiceImpl billServiceImpl;
 	
 	@Override
 	public List<?> getCartItems(Integer id) {
@@ -172,11 +214,29 @@ public class AddtocartServiceImpl implements AddtocartService {
 		List<Addtocartmaster> addtocartmasters;
 		ordermaster = new Ordermaster();
 		
+		List<Ordermaster> orderList;
+		
 		Calendar calobj = Calendar.getInstance();
+
+		inventorymaster = new Inventorymaster();
+		
+		dartproductmaster = new Dartproductmaster();
+		
+		productmaster = new Productmaster();
+		
+		Integer productinvid = null, dartpid = null, pcdpid = null;
+		
+		List<Inventorymaster> inventoryList;
+		List<Dartproductmaster> dartproductList;
+		List<Productmaster> pcdproductList;
 		
 		try {
 			
+			inventoryList = new ArrayList<>();
+			
 			addtocartmasters = new ArrayList<>();
+			
+			orderList = new ArrayList<>();
 			
 			if(null != userid) {
 				
@@ -187,25 +247,29 @@ public class AddtocartServiceImpl implements AddtocartService {
 					for(int i=0; i < addtocartmasters.size(); i++) {
 					
 						if(null == ordermasterRepository.getMaxId()) {
-						ordermaster.setOid(1);
+							ordermaster.setOid(1);
 						} else {
-						ordermaster.setOid(ordermasterRepository.getMaxId()+1);
+							ordermaster.setOid(ordermasterRepository.getMaxId()+1);
 						}
 					
 						if(null != addtocartmasters.get(i).getDpid()) {
-						ordermaster.setDpid(addtocartmasters.get(i).getDpid());
+							ordermaster.setDpid(addtocartmasters.get(i).getDpid());
+							productinvid = ordermasterRepository.getDartProductInventoryTaskId(ordermaster.getDpid());
+							dartpid = dartProductRepository.getDartProductid(ordermaster.getDpid());
 						}
 					
 						if(null != addtocartmasters.get(i).getDsid()) {
-						ordermaster.setDsid(addtocartmasters.get(i).getDsid());
+							ordermaster.setDsid(addtocartmasters.get(i).getDsid());
 						}
 					
 						if(null != addtocartmasters.get(i).getPpid()) {
-						ordermaster.setPpid(addtocartmasters.get(i).getPpid());
+							ordermaster.setPpid(addtocartmasters.get(i).getPpid());
+							productinvid = ordermasterRepository.getPcdProductInventoryTaskId(ordermaster.getPpid());
+							pcdpid = productRepository.getProductid(ordermaster.getPpid());
 						}
 					
 						if(null != addtocartmasters.get(i).getPsid()) {
-						ordermaster.setPsid(addtocartmasters.get(i).getPsid());
+							ordermaster.setPsid(addtocartmasters.get(i).getPsid());
 						}
 					
 						if(null != addtocartmasters.get(i).getVid()) {
@@ -213,24 +277,90 @@ public class AddtocartServiceImpl implements AddtocartService {
 						}
 					
 						if(null != addtocartmasters.get(i).getTotalproducts()) {
-						ordermaster.setTotalproducts(addtocartmasters.get(i).getTotalproducts());
+							ordermaster.setTotalproducts(addtocartmasters.get(i).getTotalproducts());
 						}
 					
 						if(null != addtocartmasters.get(i).getTotalprice()) {
-						ordermaster.setTotalprice(addtocartmasters.get(i).getTotalprice());
+							ordermaster.setTotalprice(addtocartmasters.get(i).getTotalprice());
 						}
 					
 						ordermaster.setOrderdatetime(calobj.getTime());
 						
 						ordermaster.setRid(userid);
+			
+						orderList.add(ordermaster);
 						
-						ordermasterRepository.save(ordermaster);
-							
+						//ordermasterRepository.save(ordermaster);
+						
 						System.out.println(addtocartmasters.get(i));
 						
+						addtocartRepository.deleteCartItem(addtocartmasters.get(i).getUserid(), addtocartmasters.get(i).getAddcartid());
+						
+						if(null != productinvid) {
+							inventoryList =	inventoryRepository.getInventoryList(productinvid);
+						
+							if(null != inventoryList && inventoryList.size() > 0) {
+								for(int j=0; j<inventoryList.size(); j++) {
+									inventoryServiceImpl.updateProductInventory(inventorymaster, inventoryList.get(j).getInventoryid(), inventoryList.get(j).getInventoryname(),
+											inventoryList.get(j).getInventorybrand(), inventoryList.get(j).getInventorylocation(), 
+											inventoryList.get(j).getInventoryquantity(), inventoryList.get(j).getInventorymimimumstock(), 
+											inventoryList.get(j).getInventoryhsncode(), inventoryList.get(j).getInventorygst(), 
+											inventoryList.get(j).getInventorystock(), ordermaster.getTotalproducts());
+								
+									if(null != dartpid) {
+										
+										dartproductList = new ArrayList<>();
+										
+										dartproductList = dartProductRepository.getDartProductById(dartpid);
+										
+										dartProductServiceImpl.updateDartProductInventory(dartproductmaster, 
+												
+												dartproductList.get(0).getPid(), dartproductList.get(0).getPname(), 
+												dartproductList.get(0).getPimage(), dartproductList.get(0).getPtype(), 
+												dartproductList.get(0).getPrice(), inventoryList.get(j).getInventorymimimumstock(),
+												inventoryList.get(j).getInventorystock(), dartproductList.get(0).getHsncode(), 
+												dartproductList.get(0).getGst(), dartproductList.get(0).getDartproductstockstatus()
+												
+												);
+										
+									}
+									
+									if(null != pcdpid) {
+										
+										pcdproductList = new ArrayList<>();
+										
+										pcdproductList = productRepository.getPcdProductById(pcdpid);
+										
+										productServiceImpl.updatePcdProductInventory(productmaster,  
+												
+												pcdproductList.get(0).getPid(), pcdproductList.get(0).getPname(), 
+												pcdproductList.get(0).getPimage(), pcdproductList.get(0).getPtype(), 
+												pcdproductList.get(0).getPrice(), inventoryList.get(j).getInventorymimimumstock(),
+												inventoryList.get(j).getInventorystock(), pcdproductList.get(0).getHsncode(), 
+												pcdproductList.get(0).getGst(), pcdproductList.get(0).getPcdproductstockstatus()
+												
+												);
+										
+									}
+								}
+							}
+						}
 					}	
-				
 				}
+			}
+			
+			if(null != orderList && orderList.size() > 1) {
+			
+				for(int i = 0; i < orderList.size(); i++) {
+					
+					billServiceImpl.generateBill(orderList, billmaster, orderList.get(i).getRid(),String.valueOf(orderList.get(i).getTotalprice()));
+					
+				}
+				
+			} else {
+				
+				billServiceImpl.generateBill(orderList, billmaster, orderList.get(0).getRid(), String.valueOf(orderList.get(0).getTotalprice()));
+				
 			}
 			
 		} catch (Exception e) {

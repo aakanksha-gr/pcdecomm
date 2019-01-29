@@ -51,4 +51,10 @@ public interface AddtocartRepository extends CrudRepository<Addtocartmaster, Int
 	@Query(nativeQuery = true, value = "DELETE FROM addtocartmaster WHERE userid = ?1 AND addcartid = ?2 ")
 	Integer deleteCartItem(Integer id, Integer itemid);
 	
+	@Query(nativeQuery = true, value = "SELECT dartproductinventorytid from dartproductinventorymaster where dartproductinventorypid = ?1")
+	Integer getDartProductInventoryTaskId(Integer productid);
+	
+	@Query(nativeQuery = true, value = "SELECT pcdproductinventorytid FROM pcdproductinventorymaster where pcdproductinventorypid = ?1")
+	Integer getProductInventoryTaskId(Integer productid);
+	
 }
