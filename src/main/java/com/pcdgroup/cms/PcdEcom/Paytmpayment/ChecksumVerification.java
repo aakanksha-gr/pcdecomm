@@ -3,11 +3,11 @@ package com.pcdgroup.cms.PcdEcom.Paytmpayment;
 import java.util.Map;
 import java.util.TreeMap;
 
-//import com.paytm.pg.merchant.CheckSumServiceHelper;
+import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 public class ChecksumVerification {
 	
-	/*private static String MercahntKey = "XXXXXXXXXXXXXXXX";
+	private static String MercahntKey = "XXXXXXXXXXXXXXXX";
 	
 	public void checkGeneratedChecksum() {
 		
@@ -48,6 +48,6 @@ public class ChecksumVerification {
 			e.printStackTrace();
 		}	
 		
-	}*/
+	}
 	
 }

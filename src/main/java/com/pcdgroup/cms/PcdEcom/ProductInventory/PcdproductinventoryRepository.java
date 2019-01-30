@@ -18,4 +18,7 @@ public interface PcdproductinventoryRepository extends CrudRepository<Pcdproduct
 	@Query(nativeQuery = true, value = "SELECT pcdproductinventoryid, pcdproductinventorypid, pcdproductinventorytid FROM pcdproductinventorymaster")
 	List<Pcdproductinventorymaster> getAllPcdproductInventory();
 	
+	@Query(nativeQuery = true, value = "SELECT pcdproductinventorytid FROM pcdproductinventorymaster WHERE pcdproductinventorypid = ?1")
+	Integer getPcdproductInventoryidByProductid(Integer productid);
+	
 }

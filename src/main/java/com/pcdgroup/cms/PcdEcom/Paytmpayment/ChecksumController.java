@@ -14,10 +14,10 @@ public class ChecksumController {
 	@Autowired
 	ChecksumGeneration checksumGeneration;
 	
-	/*@RequestMapping(method=RequestMethod.POST, value="/generateChecksum")
+	@RequestMapping(method=RequestMethod.POST, value="/generateChecksum")
 	public TreeMap<String, String> generateChecksum(@RequestBody ChecksumGenerationBean checksumGenerationBean) {
-		//return checksumGeneration.GenerateChecksum(checksumGenerationBean); 
+		return checksumGeneration.GenerateChecksum(checksumGenerationBean); 
 		
-	}*/
+	}
 	
 }

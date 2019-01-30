@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcdgroup.cms.PcdEcom.Inventory.InventoryRepository;
+import com.pcdgroup.cms.PcdEcom.Inventory.Inventorymaster;
+
 @Service
 public class PcdproductinventoryServiceImpl implements PcdproductinventoryService {
 
 	@Autowired
 	PcdproductinventoryRepository productinventoryRepository;
+	
+	@Autowired
+	InventoryRepository inventoryRepository;
 
 	@Override
 	public String createProductInventory(Pcdproductinventorymaster productinventorymaster) {
@@ -140,6 +146,27 @@ public class PcdproductinventoryServiceImpl implements PcdproductinventoryServic
 		
 		return "Something wents wrong..!";
 		
+	}
+
+	@Override
+	public List<Inventorymaster> getProductinventoryByProductId(Integer productid) {
+		
+		Integer pinventoryid = null;
+		
+		try {
+			
+			pinventoryid = productinventoryRepository.getPcdproductInventoryidByProductid(productid);
+			
+			return inventoryRepository.getInventoryList(pinventoryid); 
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
 	}
 	
 }

@@ -9,5 +9,6 @@ public interface PcdproductinventoryService {
 	public List<Pcdproductinventorymaster> getAllProductInventories();
 	public String deleteProductInventory(Integer ProductInventoryid);
 	public String updateProductInventory(Pcdproductinventorymaster productinventorymaster, Integer productinventoryid);
+	public List<?> getProductinventoryByProductId(Integer productid);
 	
 }

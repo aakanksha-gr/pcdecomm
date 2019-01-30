@@ -4,12 +4,12 @@ import java.util.TreeMap;
 
 import org.springframework.stereotype.Service;
 
-//import com.paytm.pg.merchant.CheckSumServiceHelper;
+import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 @Service
 public class ChecksumGeneration {
 	
-	/*//Below parameters provided by Paytm
+	//Below parameters provided by Paytm
 	private static String MercahntKey = "XXXXXXXXXXXXXXXX";
 	private static String MID = "XXXXXXXXXXXXXXXXXXXXXXXX"; 
 	;
@@ -47,6 +47,6 @@ public class ChecksumGeneration {
 		
 		return null;
 		
-	}*/
+	}
 	
 }

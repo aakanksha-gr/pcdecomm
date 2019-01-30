@@ -224,6 +224,8 @@ public class AddtocartServiceImpl implements AddtocartService {
 		
 		productmaster = new Productmaster();
 		
+		billmaster = new Billmaster();
+		
 		Integer productinvid = null, dartpid = null, pcdpid = null;
 		
 		List<Inventorymaster> inventoryList;
@@ -345,22 +347,27 @@ public class AddtocartServiceImpl implements AddtocartService {
 								}
 							}
 						}
+						
+						if(orderList.size() == addtocartmasters.size()) {
+			
+							if(null != orderList && orderList.size() > 1) {
+								
+								for(int k = 0; k < orderList.size(); k++) {
+									
+									billServiceImpl.generateBill(orderList, billmaster, orderList.get(k).getRid(),String.valueOf(orderList.get(k).getTotalprice()));
+									
+								}
+								
+							} else {
+								
+								billServiceImpl.generateBill(orderList, billmaster, orderList.get(0).getRid(), String.valueOf(orderList.get(0).getTotalprice()));
+								
+							}
+							
+						}
+						
 					}	
 				}
-			}
-			
-			if(null != orderList && orderList.size() > 1) {
-			
-				for(int i = 0; i < orderList.size(); i++) {
-					
-					billServiceImpl.generateBill(orderList, billmaster, orderList.get(i).getRid(),String.valueOf(orderList.get(i).getTotalprice()));
-					
-				}
-				
-			} else {
-				
-				billServiceImpl.generateBill(orderList, billmaster, orderList.get(0).getRid(), String.valueOf(orderList.get(0).getTotalprice()));
-				
 			}
 			
 		} catch (Exception e) {

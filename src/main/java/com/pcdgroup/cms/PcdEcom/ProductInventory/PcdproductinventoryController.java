@@ -30,6 +30,13 @@ public class PcdproductinventoryController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/getPcdproductinventoryByProductId/{pcdproductid}")
+	public List<?> getPcdproductinventoryByProductId(@PathVariable Integer pcdproductid) {
+		
+		return productinventoryServiceImpl.getProductinventoryByProductId(pcdproductid);
+		
+	}
+	
 	@RequestMapping(method=RequestMethod.GET, value="/getAllPcdproductinventory")
 	public List<?> getAllPcdproductinventory() {
 		

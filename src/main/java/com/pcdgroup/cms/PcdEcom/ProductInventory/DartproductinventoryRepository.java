@@ -15,6 +15,9 @@ public interface DartproductinventoryRepository extends CrudRepository<Dartprodu
 	@Query(nativeQuery = true, value = "SELECT dartproductinventoryid, dartproductinventorypid, dartproductinventorytid FROM dartproductinventorymaster WHERE dartproductinventoryid = ?1")
 	Dartproductinventorymaster getDartproductInventory(Integer dartproductinventoryid);
 	
+	@Query(nativeQuery = true, value = "SELECT dartproductinventorytid FROM dartproductinventorymaster WHERE dartproductinventorypid = ?1")
+	Integer getDartproductInventoryByProductId(Integer datproductid);
+	
 	@Query(nativeQuery = true, value = "SELECT dartproductinventoryid, dartproductinventorypid, dartproductinventorytid FROM dartproductinventorymaster")
 	List<Dartproductinventorymaster> getAllDartproductInventory();
 	

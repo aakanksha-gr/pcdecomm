@@ -9,5 +9,6 @@ public interface DartproductinventoryService {
 	public List<Dartproductinventorymaster> getAllDartproductInventories();
 	public String deleteDartproductInventory(Integer dartproductinventoryid);
 	public String updateDartproductInventory(Dartproductinventorymaster dartproductinventorymaster, Integer dartproductinventoryid);
+	public List<?> getDartproductInventoryByProductId(Integer dartproductid);
 	
 }

@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pcdgroup.cms.PcdEcom.Inventory.Inventorymaster;
+
 @RestController
 public class DartproductinventoryController {
 
 	@Autowired
 	DartproductinventoryServiceImpl dartproductinventoryServiceImpl;
+	
+	Inventorymaster inventorymaster;
 	
 	@RequestMapping(method=RequestMethod.POST, value="/createDartproductinventory")
 	public String createDartproductinventory(@RequestBody Dartproductinventorymaster dartproductinventorymaster) {
@@ -26,6 +30,13 @@ public class DartproductinventoryController {
 	public Dartproductinventorymaster getDartproductinventory(@PathVariable Integer dartproductinventoryid) {
 		
 		return dartproductinventoryServiceImpl.getDartproductInventory(dartproductinventoryid);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/getDartproductinventorybyproductid/{dartproductid}")
+	public List<Inventorymaster>getDartproductinventoryByProductId(@PathVariable Integer dartproductid) {
+		
+		return dartproductinventoryServiceImpl.getDartproductInventoryByProductId(dartproductid);
 		
 	}
 	
