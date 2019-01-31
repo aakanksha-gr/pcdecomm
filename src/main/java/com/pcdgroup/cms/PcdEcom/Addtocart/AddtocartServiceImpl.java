@@ -216,6 +216,8 @@ public class AddtocartServiceImpl implements AddtocartService {
 		
 		List<Ordermaster> orderList;
 		
+		List<Ordermaster> mainOrderList;
+		
 		Calendar calobj = Calendar.getInstance();
 
 		inventorymaster = new Inventorymaster();
@@ -239,6 +241,8 @@ public class AddtocartServiceImpl implements AddtocartService {
 			addtocartmasters = new ArrayList<>();
 			
 			orderList = new ArrayList<>();
+			
+			mainOrderList = new ArrayList<>();
 			
 			if(null != userid) {
 				
@@ -289,10 +293,12 @@ public class AddtocartServiceImpl implements AddtocartService {
 						ordermaster.setOrderdatetime(calobj.getTime());
 						
 						ordermaster.setRid(userid);
-			
-						orderList.add(ordermaster);
 						
-						//ordermasterRepository.save(ordermaster);
+						ordermasterRepository.save(ordermaster);
+						
+						orderList.addAll(ordermasterRepository.getOrderById(ordermaster.getOid()));
+						
+						//mainOrderList.addAll(orderList);
 						
 						System.out.println(addtocartmasters.get(i));
 						
@@ -352,11 +358,7 @@ public class AddtocartServiceImpl implements AddtocartService {
 			
 							if(null != orderList && orderList.size() > 1) {
 								
-								for(int k = 0; k < orderList.size(); k++) {
-									
-									billServiceImpl.generateBill(orderList, billmaster, orderList.get(k).getRid(),String.valueOf(orderList.get(k).getTotalprice()));
-									
-								}
+								billServiceImpl.generateBill(orderList, billmaster, null, null);
 								
 							} else {
 								
