@@ -14,7 +14,7 @@ public class Billmaster {
 	private Integer billid; 
 	
 	@Column(name="billno")
-	private String billno; 
+	private Integer billno; 
 	
 	@Column(name="billorderid")
 	private Integer billorderid; 
@@ -35,7 +35,7 @@ public class Billmaster {
 		super();
 	}
 
-	public Billmaster(Integer billid, String billno, Integer billorderid, String ordername, String orderquantity,
+	public Billmaster(Integer billid, Integer billno, Integer billorderid, String ordername, String orderquantity,
 			Integer billinguserid, String totalamount) {
 		super();
 		this.billid = billid;
@@ -55,12 +55,12 @@ public class Billmaster {
 		this.billid = billid;
 	}
 
-	public String getBillno() {
+	public Integer getBillno() {
 		return billno;
 	}
 
-	public void setBillno(String billno) {
-		this.billno = billno;
+	public void setBillno(int i) {
+		this.billno = i;
 	}
 
 	public Integer getBillorderid() {

@@ -14,63 +14,76 @@ public class BillServiceImpl implements BillService {
 	BillRepository billRepository;
 	
 	public void generateBill(List<Ordermaster> ordersList, Billmaster billmaster, Integer userid, String totalamount) {
-		
-		if(null != userid) {
 			
-			for(int i=0; i < ordersList.size(); i++) {
+		for(int i=0; i < ordersList.size(); i++) {
 				
-				if(null != billRepository.getMaxId()) {
-					
-					billmaster.setBillid(billRepository.getMaxId()+1);
-					
-				} else {
-					
-					billmaster.setBillid(1);
-					
-				}
+				userid = ordersList.get(i).getRid();
 				
-				if(null != billRepository.getMaxOrderno()) {
+				totalamount = String.valueOf(ordersList.get(i).getTotalprice());
+				
+				
+				if(null != userid) {
 					
-					if(ordersList.size() > 1 && ordersList.get(0).getOrderdatetime() == ordersList.get(i).getOrderdatetime()) {
+					if(null != billRepository.getMaxId()) {
 						
-						billmaster.setBillno(String.valueOf(billRepository.getMaxOrderno()+1));
+						billmaster.setBillid(billRepository.getMaxId()+1);
 						
 					} else {
 						
-						billmaster.setBillno(String.valueOf(billRepository.getMaxOrderno()));
+						billmaster.setBillid(1);
 						
 					}
 					
-				} else {
+					if(null != billRepository.getMaxOrderno()) {
+						
+						if(i != 0 && ordersList.get(0).getOrderdatetime().getDate() == ordersList.get(i).getOrderdatetime().getDate()
+								&& ordersList.get(0).getOrderdatetime().getMonth() == ordersList.get(i).getOrderdatetime().getMonth()
+								&& ordersList.get(0).getOrderdatetime().getHours() == ordersList.get(i).getOrderdatetime().getHours()
+								&& ordersList.get(0).getOrderdatetime().getMinutes() == ordersList.get(i).getOrderdatetime().getMinutes()
+								) {
+							
+							System.out.println(ordersList.get(0).getOrderdatetime().getDate() +" d vs d "+ ordersList.get(i).getOrderdatetime().getDate() 
+								+"-"+ordersList.get(0).getOrderdatetime().getMonth() +" mon vs mon "+ ordersList.get(i).getOrderdatetime().getMonth()
+								+"-"+ordersList.get(0).getOrderdatetime().getHours() +" h vs h "+ ordersList.get(i).getOrderdatetime().getHours()
+								+"-"+ordersList.get(0).getOrderdatetime().getMinutes() +" min vs min "+ ordersList.get(i).getOrderdatetime().getMinutes());
+							
+							billmaster.setBillno(billRepository.getMaxOrderno());
+							
+						} else {
+							
+							billmaster.setBillno(billRepository.getMaxOrderno()+1);
+							
+						}
+						
+					} else {
+						
+						billmaster.setBillno(1);
+						
+					}
 					
-					billmaster.setBillno("1");
+					if(null != ordersList.get(i).getOid()) {
+						
+						billmaster.setBillorderid(ordersList.get(i).getOid());
+						
+					}
+					
+					if(null != ordersList.get(i).getRid()) {
+						
+						billmaster.setBillinguserid(ordersList.get(i).getRid());
+						
+					}
+					
+					if(null != totalamount && totalamount.trim().length() > 0) {
+						
+						billmaster.setTotalamount(totalamount);
+						
+					}
+					
+					billRepository.save(billmaster);
 					
 				}
 				
-				if(null != ordersList.get(i).getOid()) {
-					
-					billmaster.setBillorderid(ordersList.get(i).getOid());
-					
-				}
-				
-				if(null != ordersList.get(i).getRid()) {
-					
-					billmaster.setBillinguserid(ordersList.get(i).getRid());
-					
-				}
-				
-				if(null != totalamount && totalamount.trim().length() > 0) {
-					
-					billmaster.setTotalamount(totalamount);
-					
-				}
-				
-				billRepository.save(billmaster);
-				
-			}
+			}	
 			
 		}
-		
-	}
-	
 }
