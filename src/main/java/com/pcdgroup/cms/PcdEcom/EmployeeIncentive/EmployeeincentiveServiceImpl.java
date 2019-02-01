@@ -139,14 +139,24 @@ public class EmployeeincentiveServiceImpl implements EmployeeincentiveService {
 		
 	}
 
-	/*@Override
-	public List<EmployeeIncentivemaster> getAllEmployeeIncentiveByMonth(EmployeeIncentivemaster employeeIncentivemaster) {
+	@Override
+	public HashMap<?,?> getAllEmployeeIncentiveByMonth(EmployeeIncentiveBean employeeIncentiveBean) {
+		
+		HashMap<String, String> gettotalincentiveofallemployees;
 		
 		try {
 		
-			if(null != employeeIncentivemaster.getIncentivedate()) {
+			gettotalincentiveofallemployees = new HashMap<>();
+			
+			if(null != employeeIncentiveBean.getMonth()) {
 				
-				return employeeincentiveRepository.getAllEmployeeincentiveByMonth(employeeIncentivemaster.getIncentivedate());
+				gettotalincentiveofallemployees.put("month", employeeIncentiveBean.getMonth());
+				
+				if(null != employeeincentiveRepository.getAllEmployeeincentiveByMonth(employeeIncentiveBean.getMonth()))
+					
+					gettotalincentiveofallemployees.put("totalincentive", String.valueOf(employeeincentiveRepository.getAllEmployeeincentiveByMonth(employeeIncentiveBean.getMonth())));
+				
+				return gettotalincentiveofallemployees;
 				
 			}
 			
@@ -159,18 +169,32 @@ public class EmployeeincentiveServiceImpl implements EmployeeincentiveService {
 		
 		return null;
 
-	}*/
+	}
 	
-	/*@Override
-	public List<EmployeeIncentivemaster> getEmployeeIncentiveByYear(EmployeeIncentivemaster employeeIncentivemaster) {
+	@Override
+	public HashMap<?,?> getEmployeeIncentiveByYear(EmployeeIncentiveBean employeeIncentiveBean) {
+		
+		HashMap<String, String> getyearlyemployeeinentive;
 		
 		try {
 				
-				if(null != employeeIncentivemaster.getIncentivedate() && null != employeeIncentivemaster.getEmployeeid()) {
+			getyearlyemployeeinentive = new HashMap<>();
+			
+			if(null != employeeIncentiveBean.getId() && null != employeeIncentiveBean.getYear()) {
+				
+				getyearlyemployeeinentive.put("empid", employeeIncentiveBean.getId());
+				
+				getyearlyemployeeinentive.put("year", employeeIncentiveBean.getYear());
+				
+				if(null != employeeincentiveRepository.getEmployeeincentiveByYear(employeeIncentiveBean.getYear(), Integer.parseInt(employeeIncentiveBean.getId()))) {
 					
-					return employeeincentiveRepository.getEmployeeincentiveByYear(employeeIncentivemaster.getIncentivedate(), employeeIncentivemaster.getEmployeeid());
+					getyearlyemployeeinentive.put("totalincentive", String.valueOf(employeeincentiveRepository.getEmployeeincentiveByYear(employeeIncentiveBean.getYear(), Integer.parseInt(employeeIncentiveBean.getId()))));
 					
+					return getyearlyemployeeinentive;
+				
 				}
+			
+			}
 			
 		} catch (Exception e) {
 			
@@ -184,14 +208,26 @@ public class EmployeeincentiveServiceImpl implements EmployeeincentiveService {
 	}
 
 	@Override
-	public List<EmployeeIncentivemaster> getAllEmployeeIncentiveByYear(EmployeeIncentivemaster employeeIncentivemaster) {
+	public HashMap<?,?> getAllEmployeeIncentiveByYear(EmployeeIncentiveBean employeeIncentiveBean) {
+		
+		HashMap<String, String> getyearlyallemployeeinentive;
 		
 		try {
+			
+			getyearlyallemployeeinentive = new HashMap<>();
 		
-			if(null != employeeIncentivemaster.getIncentivedate()) {
+			if(null != employeeIncentiveBean.getYear()) {
 				
-				return employeeincentiveRepository.getAllEmployeeincentiveByYear(employeeIncentivemaster.getIncentivedate());
+				getyearlyallemployeeinentive.put("year", employeeIncentiveBean.getYear());
 				
+				if(null != employeeincentiveRepository.getAllEmployeeincentiveByYear(employeeIncentiveBean.getYear())) {
+					
+					getyearlyallemployeeinentive.put("totalincentive", String.valueOf(employeeincentiveRepository.getAllEmployeeincentiveByYear(employeeIncentiveBean.getYear())));
+					
+					return getyearlyallemployeeinentive;
+				
+				}
+			
 			}
 			
 		} catch (Exception e) {
@@ -203,6 +239,79 @@ public class EmployeeincentiveServiceImpl implements EmployeeincentiveService {
 		
 		return null;
 
-	}*/
+	}
+	
+	@Override
+	public HashMap<?,?> getAllEmployeeIncentiveByMonthYear(EmployeeIncentiveBean employeeIncentiveBean) {
+		
+		HashMap<String, String> getmonthyearlyallemployeeinentive;
+		
+		try {
+			
+			getmonthyearlyallemployeeinentive = new HashMap<>();
+		
+			if(null != employeeIncentiveBean.getMonth() && null != employeeIncentiveBean.getYear()) {
+				
+				getmonthyearlyallemployeeinentive.put("month", employeeIncentiveBean.getMonth());
+				
+				getmonthyearlyallemployeeinentive.put("year", employeeIncentiveBean.getYear());
+				
+				if(null != employeeincentiveRepository.getAllEmployeeincentiveByMonthYear(employeeIncentiveBean.getMonth(), employeeIncentiveBean.getYear())) {
+					
+					getmonthyearlyallemployeeinentive.put("totalincentive", String.valueOf(employeeincentiveRepository.getAllEmployeeincentiveByMonthYear(employeeIncentiveBean.getMonth(), employeeIncentiveBean.getYear())));
+					
+					return getmonthyearlyallemployeeinentive;
+				
+				}
+			
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+
+	}
+	
+	public HashMap<?,?> getEmployeeIncentiveByMonthYear(EmployeeIncentiveBean employeeIncentiveBean) {
+		
+		HashMap<String, String> getmonthyearlyemployeeinentive;
+		
+		try {
+			
+			getmonthyearlyemployeeinentive = new HashMap<>();
+		
+			if(null != employeeIncentiveBean.getMonth() && null != employeeIncentiveBean.getYear() && null != employeeIncentiveBean.getId()) {
+				
+				getmonthyearlyemployeeinentive.put("empid", employeeIncentiveBean.getId());
+				
+				getmonthyearlyemployeeinentive.put("month", employeeIncentiveBean.getMonth());
+				
+				getmonthyearlyemployeeinentive.put("year", employeeIncentiveBean.getYear());
+				
+				if(null != employeeincentiveRepository.getEmployeeincentiveByMonthYear(employeeIncentiveBean.getMonth(), employeeIncentiveBean.getYear(), Integer.parseInt(employeeIncentiveBean.getId()))) {
+					
+					getmonthyearlyemployeeinentive.put("totalincentive", String.valueOf(employeeincentiveRepository.getEmployeeincentiveByMonthYear(employeeIncentiveBean.getMonth(), employeeIncentiveBean.getYear(), Integer.parseInt(employeeIncentiveBean.getId()))));
+					
+					return getmonthyearlyemployeeinentive;
+				
+				}
+			
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+
+	}
  	
 }

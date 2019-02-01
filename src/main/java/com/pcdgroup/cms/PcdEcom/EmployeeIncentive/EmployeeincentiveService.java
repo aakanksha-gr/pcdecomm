@@ -9,8 +9,9 @@ public interface EmployeeincentiveService {
 	public List<?> getAllEmployeeIncentive(Integer index);
 	public EmployeeIncentivemaster getEmployeeIncentiveById(Integer empid);
 	public HashMap<?,?> getEmployeeIncentiveByMonth(EmployeeIncentiveBean employeeIncentiveBean);
-	//public List<EmployeeIncentivemaster> getAllEmployeeIncentiveByMonth(EmployeeIncentivemaster employeeIncentivemaster);
-	/*public List<EmployeeIncentivemaster> getEmployeeIncentiveByYear(EmployeeIncentivemaster employeeIncentivemaster);
-	public List<EmployeeIncentivemaster> getAllEmployeeIncentiveByYear(EmployeeIncentivemaster employeeIncentivemaster);*/
+	public HashMap<?,?> getAllEmployeeIncentiveByMonth(EmployeeIncentiveBean employeeIncentiveBean);
+	public HashMap<?,?> getEmployeeIncentiveByYear(EmployeeIncentiveBean employeeIncentiveBean);
+	public HashMap<?,?> getAllEmployeeIncentiveByYear(EmployeeIncentiveBean employeeIncentiveBean);
+	public HashMap<?, ?> getAllEmployeeIncentiveByMonthYear(EmployeeIncentiveBean employeeIncentiveBean);
 	
 }

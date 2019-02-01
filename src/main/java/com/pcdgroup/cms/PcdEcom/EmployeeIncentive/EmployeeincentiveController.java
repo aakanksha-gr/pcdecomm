@@ -43,26 +43,40 @@ public class EmployeeincentiveController {
 		return employeeincentiveServiceImpl.getEmployeeIncentiveByMonth(employeeIncentiveBean);
 		
 	}
-	
-	/*@RequestMapping(method=RequestMethod.POST, value="/getAllEmployeeincentiveByMonth")
-	public List<EmployeeIncentivemaster> getAllEmployeeincentiveMonth(@RequestBody EmployeeIncentivemaster employeeIncentivemaster) {
+	/* ----------------------------------------------URL not mention in excel sheet------------------------------------------------------------------ */
+	@RequestMapping(method=RequestMethod.POST, value="/getAllEmployeeincentiveByMonth")
+	public HashMap<?,?> getAllEmployeeincentiveMonth(@RequestBody EmployeeIncentiveBean incentiveBean) {
 		
-		return employeeincentiveServiceImpl.getAllEmployeeIncentiveByMonth(employeeIncentivemaster);
+		return employeeincentiveServiceImpl.getAllEmployeeIncentiveByMonth(incentiveBean);
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/getEmployeeincentiveByYear")
-	public List<EmployeeIncentivemaster> getEmployeeincentiveByYear(@RequestBody EmployeeIncentivemaster employeeIncentivemaster) {
+	public HashMap<?,?> getEmployeeincentiveByYear(@RequestBody EmployeeIncentiveBean incentiveBean) {
 		
-		return employeeincentiveServiceImpl.getEmployeeIncentiveByYear(employeeIncentivemaster);
+		return employeeincentiveServiceImpl.getEmployeeIncentiveByYear(incentiveBean);
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/getAllEmployeeincentiveByYear")
-	public List<EmployeeIncentivemaster> getAllEmployeeincentiveYear(@RequestBody EmployeeIncentivemaster employeeIncentivemaster) {
+	public HashMap<?,?> getAllEmployeeincentiveYear(@RequestBody EmployeeIncentiveBean incentiveBean) {
 		
-		return employeeincentiveServiceImpl.getAllEmployeeIncentiveByYear(employeeIncentivemaster);
+		return employeeincentiveServiceImpl.getAllEmployeeIncentiveByYear(incentiveBean);
 		
-	}*/
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/getAllEmployeeincentiveByMonthYear")
+	public HashMap<?,?> getAllEmployeeincentiveMonthYear(@RequestBody EmployeeIncentiveBean incentiveBean) {
+		
+		return employeeincentiveServiceImpl.getAllEmployeeIncentiveByMonthYear(incentiveBean);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/getEmployeeincentiveByMonthYear")
+	public HashMap<?,?> getEmployeeincentiveMonthYear(@RequestBody EmployeeIncentiveBean incentiveBean) {
+		
+		return employeeincentiveServiceImpl.getEmployeeIncentiveByMonthYear(incentiveBean);
+		
+	}
 	
 }
