@@ -9,5 +9,6 @@ public interface VendorinventoryService {
 	public List<Vendorinventorymaster> getAllVendorinventory();
 	public String deleteVendorinventory(Integer vendorinventoryid);
 	public String updateVendorinventory(Vendorinventorymaster vendorinventorymaster, Integer vendorinventoryid);
+	public List<?> getVendorinventoryByVendorId(Integer vendorid);
 	
 }

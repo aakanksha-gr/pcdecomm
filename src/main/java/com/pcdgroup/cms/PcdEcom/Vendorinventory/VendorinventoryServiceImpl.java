@@ -1,15 +1,22 @@
 package com.pcdgroup.cms.PcdEcom.Vendorinventory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.pcdgroup.cms.PcdEcom.Inventory.InventoryRepository;
+import com.pcdgroup.cms.PcdEcom.Inventory.Inventorymaster;
 
 @Service
 public class VendorinventoryServiceImpl implements VendorinventoryService {
 
 	@Autowired
 	VendorinventoryRepository vendorinventoryRepository;
+	
+	@Autowired
+	InventoryRepository inventoryRepository;
 
 	@Override
 	public String createVendorinventory(Vendorinventorymaster vendorinventorymaster) {
@@ -140,6 +147,43 @@ public class VendorinventoryServiceImpl implements VendorinventoryService {
 		
 		return "Something wents wrong..!";
 		
+	}
+
+	@Override
+	public List<?> getVendorinventoryByVendorId(Integer vendorid) {
+		
+		List<Integer> getInventoryIdByVendorId;
+		
+		List<Inventorymaster> getInventoryByVendorId;
+		
+		try {
+			
+			getInventoryIdByVendorId = new ArrayList<>();
+			
+			getInventoryByVendorId = new ArrayList<>();
+			
+			if(null != vendorid) {
+				
+				getInventoryIdByVendorId = vendorinventoryRepository.getInventoryIdByVendorId(vendorid);
+				
+				for(int i=0; i<getInventoryIdByVendorId.size(); i++) {
+					
+					getInventoryByVendorId.add(inventoryRepository.getInventory(getInventoryIdByVendorId.get(i)));
+					
+				}
+				
+				return getInventoryByVendorId;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
 	}
 	
 }

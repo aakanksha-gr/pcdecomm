@@ -29,6 +29,13 @@ public class VendorinventoryController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/getVendorinventoryByVendorId/{vendorid}")
+	public List<?> getVendorinventoryByVendorid(@PathVariable Integer vendorid) {
+		
+		return vendorinventoryServiceImpl.getVendorinventoryByVendorId(vendorid);
+		
+	}
+	
 	@RequestMapping(method=RequestMethod.GET, value="/getAllVendorinventory")
 	public List<?> getAllVendorinventory() {
 		
