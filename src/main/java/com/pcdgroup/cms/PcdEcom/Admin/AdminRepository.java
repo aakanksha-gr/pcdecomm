@@ -27,7 +27,7 @@ public interface AdminRepository extends CrudRepository<Adminmaster, Integer> {
 	@Query(nativeQuery = true, value = "SELECT adminid, adminfname, adminlname, adminemail, adminpassword, admincontactno, adminaddress FROM adminmaster WHERE adminid = ?1")
 	Adminmaster checkDeleteIdExist(Integer adminid);
 	
-	@Query(nativeQuery = true, value = "SELECT adminid, adminfname, adminlname, adminemail, adminpassword, admincontactno, adminaddress FROM adminmaster WHERE LOWER(trim(adminemail = LOWER(trim(?1)))) and LOWER(trim(adminpassword = LOWER(trim(?2)))) LIMIT 1")
+	@Query(nativeQuery = true, value = "SELECT adminid, adminfname, adminlname, adminemail, adminpassword, admincontactno, adminaddress FROM adminmaster WHERE LOWER(trim(adminemail)) = LOWER(trim(?1)) and LOWER(trim(adminpassword)) = LOWER(trim(?2)) LIMIT 1")
 	Adminmaster checkAdminLogin(String employeeemail, String employeepassword);
 	
 }
