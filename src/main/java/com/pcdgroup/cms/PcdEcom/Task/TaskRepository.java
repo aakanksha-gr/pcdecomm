@@ -15,6 +15,9 @@ public interface TaskRepository extends CrudRepository<Taskmaster, Integer> {
 	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster WHERE taskid = ?1")
 	Taskmaster getTask(Integer taskid);
 	
+	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster WHERE taskid = ?1")
+	List<Taskmaster> getAllTaskByTaskId(Integer taskid);
+	
 	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster")
 	List<Taskmaster> getAllTask();
 	

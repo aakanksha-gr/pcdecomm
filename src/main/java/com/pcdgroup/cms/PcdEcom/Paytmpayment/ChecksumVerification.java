@@ -2,8 +2,7 @@ package com.pcdgroup.cms.PcdEcom.Paytmpayment;
 
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.paytm.pg.merchant.CheckSumServiceHelper;
+import com.pcdgroup.cms.PcdEcom.paytm.CheckSumServiceHelper;
 
 public class ChecksumVerification {
 	
@@ -26,15 +25,12 @@ public class ChecksumVerification {
 				paytmParams.put(entry.getKey(), entry.getValue());
 			}
 		    
-		    
-		    
 		}
-		
 		
 		boolean isValideChecksum = false;
 		try{
 			
-			isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(MercahntKey, paytmParams, paytmChecksum);
+			isValideChecksum = CheckSumServiceHelper.verifycheckSum(MercahntKey, paytmParams, paytmChecksum);
 			
 			System.out.println(isValideChecksum);
 			

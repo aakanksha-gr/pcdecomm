@@ -15,6 +15,9 @@ public interface DartproducttaskRepository extends CrudRepository<Dartproducttas
 	@Query(nativeQuery = true, value = "SELECT dartproducttaskid, dartpid, dartptid FROM dartproducttaskmaster WHERE dartproducttaskid = ?1")
 	Dartproducttaskmaster getDartproductTask(Integer dertproducttaskid);
 	
+	@Query(nativeQuery = true, value = "SELECT dartptid FROM dartproducttaskmaster WHERE dartpid = ?1")
+	Integer getTaskIdRelatedToProductId(Integer dartpid);
+	
 	@Query(nativeQuery = true, value = "SELECT dartproducttaskid, dartpid, dartptid FROM dartproducttaskmaster WHERE dartpid = ?1")
 	List<Dartproducttaskmaster> getDartproductTaskByProductid(Integer dertproductid);
 	

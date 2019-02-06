@@ -15,6 +15,9 @@ public interface PcdproducttaskRepository extends CrudRepository<Pcdproducttaskm
 	@Query(nativeQuery = true, value = "SELECT pcdproducttaskid, pcdpid, tid FROM pcdproducttaskmaster WHERE pcdproducttaskid = ?1")
 	Pcdproducttaskmaster getPcdproductTask(Integer pcdproducttaskid);
 	
+	@Query(nativeQuery = true, value = "SELECT tid FROM pcdproducttaskmaster WHERE pcdproducttaskid = ?1")
+	Integer getTaskIdByProductId(Integer pid);
+	
 	@Query(nativeQuery = true, value = "SELECT pcdproducttaskid, pcdpid, tid FROM pcdproducttaskmaster WHERE pcdpid = ?1")
 	List<Pcdproducttaskmaster> getPcdproductTaskByProductid(Integer pcdproducttaskproductid);
 	

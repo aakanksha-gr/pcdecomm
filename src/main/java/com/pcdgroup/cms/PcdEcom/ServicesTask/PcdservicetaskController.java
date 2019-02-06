@@ -32,7 +32,7 @@ public class PcdservicetaskController {
 	@RequestMapping(method=RequestMethod.GET, value="/getPcdservicetaskByServiceid/{pcdserviceid}")
 	public List<?> getPcdservicetaskByServiceid(@PathVariable Integer pcdserviceid) {
 		
-		return pcdservicetaskServiceImpl.getPcdserviceTaskByServiceid(pcdserviceid);
+		return pcdservicetaskServiceImpl.getAlltaskByServiceId(pcdserviceid);
 		
 	}
 	

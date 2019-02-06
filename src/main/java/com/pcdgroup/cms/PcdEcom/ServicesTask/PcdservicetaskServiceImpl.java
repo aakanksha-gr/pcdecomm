@@ -5,11 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcdgroup.cms.PcdEcom.Task.TaskRepository;
+import com.pcdgroup.cms.PcdEcom.Task.Taskmaster;
+
 @Service
 public class PcdservicetaskServiceImpl implements PcdservicetaskService {
 
 	@Autowired
 	PcdservicetaskRepository pcdservicetaskRepository;
+	
+	@Autowired
+	TaskRepository taskRepository;
+	
+	Taskmaster taskmaster;
 	
 	@Override
 	public String createPcdserviceTask(Pcdservicetaskmaster pcdservicetaskmaster) {
@@ -162,6 +170,33 @@ public class PcdservicetaskServiceImpl implements PcdservicetaskService {
 		
 		return "Something wents wrong..!";
 		
+	}
+
+	public List<?> getAlltaskByServiceId(Integer pcdserviceid) {
+
+		Integer tid;
+		
+		try {
+			
+			if(null != pcdserviceid) {
+				
+				tid = pcdservicetaskRepository.getTaskIdByServiceid(pcdserviceid);
+				
+				if(null != tid) {
+					
+					return taskRepository.getAllTaskByTaskId(tid);
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		return null;
 	}
 
 }

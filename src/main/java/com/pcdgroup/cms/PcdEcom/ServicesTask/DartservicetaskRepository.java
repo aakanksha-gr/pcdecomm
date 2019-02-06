@@ -15,6 +15,9 @@ public interface DartservicetaskRepository extends CrudRepository<Dartservicetas
 	@Query(nativeQuery = true, value = "SELECT dartservicetaskid, dartsid, dartstid FROM dartservicetaskmaster WHERE dartservicetaskid = ?1")
 	Dartservicetaskmaster getDartserviceTask(Integer dartservicetaskid);
 	
+	@Query(nativeQuery = true, value = "SELECT dartstid FROM dartservicetaskmaster WHERE dartsid = ?1")
+	Integer getTaskIdByServiceId(Integer serviceid);
+	
 	@Query(nativeQuery = true, value = "SELECT dartservicetaskid, dartsid, dartstid FROM dartservicetaskmaster")
 	List<Dartservicetaskmaster> getAllDartserviceTask();
 

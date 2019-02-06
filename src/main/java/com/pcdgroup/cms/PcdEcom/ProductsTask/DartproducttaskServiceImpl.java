@@ -5,11 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcdgroup.cms.PcdEcom.Task.TaskRepository;
+import com.pcdgroup.cms.PcdEcom.Task.Taskmaster;
+
 @Service
 public class DartproducttaskServiceImpl implements DartproducttaskService {
 
 	@Autowired
 	DartproducttaskRepository dartproducttaskRepository;
+	
+	@Autowired
+	TaskRepository taskRepository;
+	
+	Taskmaster taskmaster;
 	
 	@Override
 	public String createDartproducttask(Dartproducttaskmaster dartproducttaskmaster) {
@@ -46,7 +54,11 @@ public class DartproducttaskServiceImpl implements DartproducttaskService {
 		
 		try {
 			
+			taskmaster = new Taskmaster();
+			
 			if(null != dartproducttaskid) {
+				
+				
 				
 				return dartproducttaskRepository.getDartproductTask(dartproducttaskid);
 				
@@ -65,11 +77,21 @@ public class DartproducttaskServiceImpl implements DartproducttaskService {
 	@Override
 	public List<?> getDartproducttaskByProductid(Integer dartproductid) {
 		
+		Integer tid;
+		
 		try {
+			
+			taskmaster = new Taskmaster();
 			
 			if(null != dartproductid) {
 				
-				return dartproducttaskRepository.getDartproductTaskByProductid(dartproductid);
+				tid = dartproducttaskRepository.getTaskIdRelatedToProductId(dartproductid);
+				
+				if(null != tid) {
+				
+					return taskRepository.getAllTaskByTaskId(tid);
+					
+				}
 				
 			}
 			
@@ -81,6 +103,7 @@ public class DartproducttaskServiceImpl implements DartproducttaskService {
 		}
 		
 		return null;
+		
 	}
 
 	@Override

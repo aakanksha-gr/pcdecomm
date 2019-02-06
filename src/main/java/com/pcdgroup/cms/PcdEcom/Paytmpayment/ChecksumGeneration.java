@@ -2,12 +2,16 @@ package com.pcdgroup.cms.PcdEcom.Paytmpayment;
 
 import java.util.TreeMap;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.paytm.pg.merchant.CheckSumServiceHelper;
+import com.pcdgroup.cms.PcdEcom.PcdEcomApplication;
+import com.pcdgroup.cms.PcdEcom.paytm.CheckSumServiceHelper;
 
 @Service
 public class ChecksumGeneration {
+	
+	private org.slf4j.Logger log = LoggerFactory.getLogger(PcdEcomApplication.class);
 	
 	//Below parameters provided by Paytm
 	private static String MercahntKey = "XXXXXXXXXXXXXXXX";
@@ -32,17 +36,24 @@ public class ChecksumGeneration {
 		paramMap.put("MOBILE_NO" , checksumGenerationBean.getMobileno());
 		paramMap.put("CALLBACK_URL" , checksumGenerationBean.getCallbackurl());
 		
-		try{
-		String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(MercahntKey, paramMap);
+	try {
+			
+		String checkSum =  CheckSumServiceHelper.genrateCheckSum(MercahntKey, paramMap);
+		
 		paramMap.put("CHECKSUMHASH" , checkSum);
 		
 		System.out.println("Paytm Payload: "+ paramMap);
 		
+		log.info(paramMap.toString());
+		
 		return paramMap;
 		
-		}catch(Exception e) {
+		} catch(Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e);
+			log.error(String.valueOf(e));
+			
 		}	
 		
 		return null;

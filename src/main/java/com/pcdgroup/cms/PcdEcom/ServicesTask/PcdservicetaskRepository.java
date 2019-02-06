@@ -15,6 +15,9 @@ public interface PcdservicetaskRepository extends CrudRepository<Pcdservicetaskm
 	@Query(nativeQuery = true, value = "SELECT pcdservicetaskid, pcdsid, pstaskid FROM pcdservicetaskmaster WHERE pcdservicetaskid = ?1")
 	Pcdservicetaskmaster getPcdserviceTask(Integer pcdservicetaskid);
 
+	@Query(nativeQuery = true, value = "SELECT pstaskid FROM pcdservicetaskmaster WHERE pcdsid = ?1")
+	Integer getTaskIdByServiceid(Integer pcdservicetaskid);
+	
 	@Query(nativeQuery = true, value = "SELECT pcdservicetaskid, pcdsid, pstaskid FROM pcdservicetaskmaster")
 	List<Pcdservicetaskmaster> getAllPcdserviceTask();
 

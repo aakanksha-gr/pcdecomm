@@ -5,11 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcdgroup.cms.PcdEcom.Task.TaskRepository;
+import com.pcdgroup.cms.PcdEcom.Task.Taskmaster;
+
 @Service
 public class PcdproducttaskServiceImpl implements PcdproducttaskService {
 
 	@Autowired
 	PcdproducttaskRepository pcdproducttaskRepository;
+	
+	@Autowired
+	TaskRepository taskRepository;
+	
+	Taskmaster taskmaster;
 	
 	@Override
 	public String createPcdproducttask(Pcdproducttaskmaster pcdproducttaskmaster) {
@@ -67,9 +75,17 @@ public class PcdproducttaskServiceImpl implements PcdproducttaskService {
 		
 		try {
 			
+			Integer tid;
+			
 			if(null != pid) {
 				
-				return pcdproducttaskRepository.getPcdproductTaskByProductid(pid);
+				tid =  pcdproducttaskRepository.getTaskIdByProductId(pid);
+				
+				if(null != tid) {
+					
+					return taskRepository.getAllTaskByTaskId(tid);
+					
+				}
 				
 			}
 			

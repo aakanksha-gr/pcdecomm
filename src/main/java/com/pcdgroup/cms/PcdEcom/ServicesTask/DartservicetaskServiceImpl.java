@@ -5,11 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcdgroup.cms.PcdEcom.Task.TaskRepository;
+import com.pcdgroup.cms.PcdEcom.Task.Taskmaster;
+
 @Service
 public class DartservicetaskServiceImpl implements DartservicetaskService {
 
 	@Autowired
 	DartservicetaskRepository dartservicetaskRepository;
+	
+	@Autowired
+	TaskRepository taskRepository;
+	
+	Taskmaster taskmaster;
 	
 	@Override
 	public String createDartserviceTask(Dartservicetaskmaster dartservicetaskmaster) {
@@ -65,11 +73,19 @@ public class DartservicetaskServiceImpl implements DartservicetaskService {
 	@Override
 	public List<?> getDartserviceTaskByServiceid(Integer dartserviceid) {
 	
+		Integer tid;
+		
 		try {
 			
 			if(null != dartserviceid) {
 				
-				return dartservicetaskRepository.getAllServiceByServiceId(dartserviceid);
+				tid = dartservicetaskRepository.getTaskIdByServiceId(dartserviceid);
+				
+				if(null != tid) {
+					
+					return taskRepository.getAllTaskByTaskId(tid);
+					
+				}
 				
 			}
 			
