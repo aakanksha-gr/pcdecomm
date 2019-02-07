@@ -14,5 +14,7 @@ public interface EmployeeService {
 	public String updateEmployee(Employeemaster employeemaster, Integer employeeid);
 	public List<?> getEmployeeByWorkingArea(String employeeworkingbrand, String employeeworkingtype, Integer index);
 	public List<?> getEmployeeByBrand(String brand);
+	public Integer countPcdBrandEmployee();
+	public Integer countDartBrandEmployee();
 	
 }

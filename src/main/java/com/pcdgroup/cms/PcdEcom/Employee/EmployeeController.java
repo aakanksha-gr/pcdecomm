@@ -73,4 +73,18 @@ public class EmployeeController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/countTotalNoOfPcdEmployee")
+	public Integer countTotalNoOfPcdEmployee() {
+	
+		return employeeServiceImpl.countPcdBrandEmployee();
+
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/countTotalNoOfDartEmployee")
+	public Integer countTotalNoOfDartEmployee() {
+		
+		return employeeServiceImpl.countDartBrandEmployee();
+		
+	}
+	
 }

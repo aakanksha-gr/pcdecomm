@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			
 			passwordsecurity = new Passwordsecurity();
 			
-			Employeemaster emplid = employeeRepository.checkEmployeeLogin(employeemaster.getEmployeeemail(), passwordsecurity.encrypt(employeemaster.getEmployeepassword()));
+			Employeemaster emplid = employeeRepository.checkEmployeeLogin(employeemaster.getEmployeeemail().toLowerCase().trim(), passwordsecurity.encrypt(employeemaster.getEmployeepassword().toLowerCase().trim()));
 			
 			if(null != emplid) {
 				
@@ -257,6 +257,56 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if(null != brand && brand.trim().length() > 0) {
 				
 				return employeeRepository.getAllEmploieesByBrand(brand);
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Integer countPcdBrandEmployee() {
+		
+		try {
+			
+			Integer countPcdEmployee;
+			
+			countPcdEmployee = employeeRepository.countTotalNoOfPcdEmployee();
+			
+			if(null != countPcdEmployee) {
+				
+				return countPcdEmployee;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Integer countDartBrandEmployee() {
+		
+		try {
+			
+			Integer countDartEmployee;
+			
+			countDartEmployee = employeeRepository.countTotalNoOfDartEmployee();
+			
+			if(null != countDartEmployee) {
+				
+				return countDartEmployee;
 				
 			}
 			
