@@ -64,13 +64,13 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public List<Taskmaster> getAllTasks() {
+	public List<Taskmaster> getAllTasks(Integer index) {
 		
 		try {
 			
-			if(null != taskRepository.getAllTask() && taskRepository.getAllTask().size() > 0) {
+			if(null != taskRepository.getAllTask(index) && taskRepository.getAllTask(index).size() > 0) {
 				
-				return taskRepository.getAllTask();
+				return taskRepository.getAllTask(index);
 				
 			}
 			

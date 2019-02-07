@@ -36,10 +36,10 @@ public class VendorinventoryController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getAllVendorinventory")
-	public List<?> getAllVendorinventory() {
+	@RequestMapping(method=RequestMethod.GET, value="/getAllVendorinventory/{index}")
+	public List<?> getAllVendorinventory(@PathVariable Integer index) {
 		
-		return vendorinventoryServiceImpl.getAllVendorinventory();
+		return vendorinventoryServiceImpl.getAllVendorinventory(index);
 		
 	}
 	

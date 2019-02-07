@@ -15,8 +15,8 @@ public interface VendorinventoryRepository extends CrudRepository<Vendorinventor
 	@Query(nativeQuery = true, value = "SELECT vendorinventoryid, vid, invid FROM vendorinventorymaster WHERE vendorinventoryid = ?1")
 	Vendorinventorymaster getVendorinventory(Integer vendorinventoryid);
 	
-	@Query(nativeQuery = true, value = "SELECT vendorinventoryid, vid, invid FROM vendorinventorymaster")
-	List<Vendorinventorymaster> getAllVendorinventory();
+	@Query(nativeQuery = true, value = "SELECT vendorinventoryid, vid, invid FROM vendorinventorymaster LIMIT ?1, 10")
+	List<Vendorinventorymaster> getAllVendorinventory(Integer index);
 	
 	@Query(nativeQuery = true, value = "SELECT invid FROM vendorinventorymaster WHERE vid = ?1")
 	List<Integer> getInventoryIdByVendorId(Integer vendorinventoryid);

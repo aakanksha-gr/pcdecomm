@@ -29,10 +29,10 @@ public class InventoryController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getAllInventory")
-	public List<?> getAllInventory() {
+	@RequestMapping(method=RequestMethod.GET, value="/getAllInventory/{index}")
+	public List<?> getAllInventory(@PathVariable Integer index) {
 		
-		return inventoryServiceImpl.getAllInventory();
+		return inventoryServiceImpl.getAllInventory(index);
 		
 	}
 	

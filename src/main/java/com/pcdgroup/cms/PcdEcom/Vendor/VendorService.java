@@ -6,7 +6,7 @@ public interface VendorService {
 
 	public String createVendor(Vendormaster vendormaster);
 	public Vendormaster getVendor(Integer vendorid);
-	public List<Vendormaster> getAllVendors();
+	public List<Vendormaster> getAllVendors(Integer index);
 	public String deleteVendor(Integer vendorid);
 	public String updateVendor(Vendormaster vendormaster, Integer vendorid);
 	

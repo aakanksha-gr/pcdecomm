@@ -70,13 +70,13 @@ public class VendorinventoryServiceImpl implements VendorinventoryService {
 	}
 
 	@Override
-	public List<Vendorinventorymaster> getAllVendorinventory() {
+	public List<Vendorinventorymaster> getAllVendorinventory(Integer index) {
 		
 		try {
 			
-			if(null != vendorinventoryRepository.getAllVendorinventory() && vendorinventoryRepository.getAllVendorinventory().size() > 0) {
+			if(null != vendorinventoryRepository.getAllVendorinventory(index) && vendorinventoryRepository.getAllVendorinventory(index).size() > 0) {
 				
-				return vendorinventoryRepository.getAllVendorinventory();
+				return vendorinventoryRepository.getAllVendorinventory(index);
 				
 			}
 			

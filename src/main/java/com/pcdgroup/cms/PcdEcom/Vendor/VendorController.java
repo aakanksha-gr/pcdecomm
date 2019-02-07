@@ -29,10 +29,10 @@ public class VendorController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getAllVendors")
-	public List<?> getAllVendors() {
+	@RequestMapping(method=RequestMethod.GET, value="/getAllVendors/{index}")
+	public List<?> getAllVendors(@PathVariable Integer index) {
 		
-		return vendorServiceImpl.getAllVendors();
+		return vendorServiceImpl.getAllVendors(index);
 		
 	}
 	

@@ -29,17 +29,17 @@ public class EmployeetaskController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getEmployeetaskByEmpid/{empid}")
-	public List<Employeetaskmaster> getEmployeetaskByEmpid(@PathVariable Integer empid) {
+	@RequestMapping(method=RequestMethod.GET, value="/getEmployeetaskByEmpid/{empid}/{index}")
+	public List<Employeetaskmaster> getEmployeetaskByEmpid(@PathVariable Integer empid, @PathVariable Integer index) {
 		
-		return employeetaskServiceImpl.getEmployeetaskByEmpid(empid);
+		return employeetaskServiceImpl.getEmployeetaskByEmpid(empid, index);
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployeetask")
-	public List<?> getAllEmployeetask() {
+	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployeetask/{index}")
+	public List<?> getAllEmployeetask(@PathVariable Integer index) {
 		
-		return employeetaskServiceImpl.getAllEmployeeTasks();
+		return employeetaskServiceImpl.getAllEmployeeTasks(index);
 		
 	}
 	
@@ -68,6 +68,62 @@ public class EmployeetaskController {
 	public List<?> getAllEmployeePendingtaskByDeadline() {
 		
 		return employeetaskServiceImpl.getAllEmployeePendingtasksByDeadline();
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployeecompletedtask")
+	public List<?> getAllEmployeecompletedtask() {
+		
+		return employeetaskServiceImpl.getAllEmployeeCompletedtasks();
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/getEmployeependingtaskByEmpid/{empid}")
+	public List<?> getEmployeependingtaskByEmpid(@PathVariable Integer empid) {
+		
+		return employeetaskServiceImpl.getAllEmployeependingtaskByEmpid(empid);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/getEmployeecompletedtaskByEmpid/{empid}")
+	public List<?> getEmployeecompletedByEmpid(@PathVariable Integer empid) {
+		
+		return employeetaskServiceImpl.getEmployeecompletedByEmpid(empid);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployeependingtaskCrossedDeadlineByEmpid/{empid}")
+	public List<?> getEmployeependingtaskCrossedDeadlineByEmpid(@PathVariable Integer empid) {
+		
+		return employeetaskServiceImpl.getAllEmployeependingtaskCrossedDeadlineByEmpid(empid);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/countTotalNoOfPendingTasksByEmpid/{empid}")
+	public Integer countTotalNoOfPendingTasksByEmpid(@PathVariable Integer empid) {
+		
+		return employeetaskServiceImpl.countTotalNoOfPendingTasksByEmpid(empid);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/countTotalNoOfCompletedTasksEmpid/{empid}")
+	public Integer countTotalNoOfCompletedTasksEmpid(@PathVariable Integer empid) {
+		
+		return employeetaskServiceImpl.countTotalNoOfCompletedTasksEmpid(empid);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/countTotalNoOfPendingTasks")
+	public Integer countTotalNoOfPendingTasks() {
+		
+		return employeetaskServiceImpl.countTotalNoOfPendingTasks();
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/countTotalNoOfCompletedTasks")
+	public Integer countTotalNoOfCompletedTasks() {
+		
+		return employeetaskServiceImpl.countTotalNoOfCompletedTasks();
 		
 	}
 	

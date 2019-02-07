@@ -1,5 +1,6 @@
 package com.pcdgroup.cms.PcdEcom.EmployeeTasks;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -68,13 +69,13 @@ public class EmployeetaskServiceImpl implements EmployeetaskService {
 		
 	}
 	
-	public List<Employeetaskmaster> getEmployeetaskByEmpid(Integer empid) {
+	public List<Employeetaskmaster> getEmployeetaskByEmpid(Integer empid, Integer index) {
 		
 		try {
 			
 			if(null != empid) {
 				
-				return employeetaskRepository.getEmployeetaskByEmpid(empid);
+				return employeetaskRepository.getEmployeetaskByEmpid(empid, index);
 				
 			}
 			
@@ -89,13 +90,13 @@ public class EmployeetaskServiceImpl implements EmployeetaskService {
 	}
 
 	@Override
-	public List<Employeetaskmaster> getAllEmployeeTasks() {
+	public List<Employeetaskmaster> getAllEmployeeTasks(Integer index) {
 		
 		try {
 			
-			if(null != employeetaskRepository.getAllEmployeetask() && employeetaskRepository.getAllEmployeetask().size() > 0) {
+			if(null != employeetaskRepository.getAllEmployeetask(index) && employeetaskRepository.getAllEmployeetask(index).size() > 0) {
 				
-				return employeetaskRepository.getAllEmployeetask();
+				return employeetaskRepository.getAllEmployeetask(index);
 				
 			}
 			
@@ -214,6 +215,235 @@ public class EmployeetaskServiceImpl implements EmployeetaskService {
 		
 		return null;
 	
+	}
+	
+	@Override
+	public List<?> getAllEmployeeCompletedtasks() {
+		
+		List<Employeetaskmaster> getAllCompletedTask;
+		
+		try {
+			
+			getAllCompletedTask = new ArrayList<>();
+			
+			getAllCompletedTask = employeetaskRepository.getAllEmployeecompletedtask();
+			
+			if(null != getAllCompletedTask && getAllCompletedTask.size() > 0) {
+			
+				return getAllCompletedTask;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+		
+	}
+
+	@Override
+	public List<?> getAllEmployeependingtaskByEmpid(Integer empid) {
+		
+		List<Employeetaskmaster> getPendingTaskByEmpid;
+		
+		try {
+			
+			getPendingTaskByEmpid = new ArrayList<>();
+			
+			if(null != empid) {
+			
+				getPendingTaskByEmpid = employeetaskRepository.getAllEmployeependingtaskByEmpid(empid);
+				
+				if(null != getPendingTaskByEmpid && getPendingTaskByEmpid.size() > 0) {
+					
+					return getPendingTaskByEmpid;
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public List<?> getEmployeecompletedByEmpid(Integer empid) {
+		
+		List<Employeetaskmaster> getCompletedTaskByEmpid;
+		
+		try {
+			
+			getCompletedTaskByEmpid = new ArrayList<>();
+			
+			if(null != empid) {
+			
+				getCompletedTaskByEmpid = employeetaskRepository.getEmployeeCompletedtaskByEmpid(empid);
+				
+				if(null != getCompletedTaskByEmpid && getCompletedTaskByEmpid.size() > 0) {
+					
+					return getCompletedTaskByEmpid;
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public List<?> getAllEmployeependingtaskCrossedDeadlineByEmpid(Integer empid) {
+		
+		List<Employeetaskmaster> getPendingTaskCrossedDeadlineByEmpid;
+		
+		try {
+			
+			getPendingTaskCrossedDeadlineByEmpid = new ArrayList<>();
+			
+			if(null != empid) {
+			
+				getPendingTaskCrossedDeadlineByEmpid = employeetaskRepository.getAllEmployeependingtaskCrossedDeadlineByEmpid(empid);
+				
+				if(null != getPendingTaskCrossedDeadlineByEmpid && getPendingTaskCrossedDeadlineByEmpid.size() > 0) {
+					
+					return getPendingTaskCrossedDeadlineByEmpid;
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Integer countTotalNoOfPendingTasksByEmpid(Integer empid) {
+
+		Integer countOfPendingtasksByEmpid;
+		
+		try {
+			
+			if(null != empid) {
+				
+				countOfPendingtasksByEmpid = employeetaskRepository.countTotalNoOfPendingTasksByEmpid(empid);
+				
+				if(null != countOfPendingtasksByEmpid) {
+					
+					return countOfPendingtasksByEmpid;
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}	
+
+		return null;
+	}
+
+	@Override
+	public Integer countTotalNoOfCompletedTasksEmpid(Integer empid) {
+
+		Integer countOfCompletedtasksByEmpid;
+		
+		try {
+			
+			if(null != empid) {
+				
+				countOfCompletedtasksByEmpid = employeetaskRepository.countTotalNoOfCompletedTasksEmpid(empid);
+				
+				if(null != countOfCompletedtasksByEmpid) {
+					
+					return countOfCompletedtasksByEmpid;
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}	
+		
+		return null;
+	}
+
+	@Override
+	public Integer countTotalNoOfPendingTasks() {
+
+	Integer countOfPendingtasks;
+		
+	try {
+			
+			countOfPendingtasks = employeetaskRepository.countTotalNoOfPendingTasks();
+				
+			if(null != countOfPendingtasks) {
+					
+				return countOfPendingtasks;
+					
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}	
+		
+		return null;
+	}
+
+	@Override
+	public Integer countTotalNoOfCompletedTasks() {
+
+		Integer countOfCompletedtasks;
+		
+		try {
+				
+				countOfCompletedtasks = employeetaskRepository.countTotalNoOfCompletedTasks();
+					
+				if(null != countOfCompletedtasks) {
+						
+					return countOfCompletedtasks;
+						
+				}
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				System.out.println(e);
+				
+			}	
+		
+		return null;
 	}
 
 }

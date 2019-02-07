@@ -15,16 +15,40 @@ public interface EmployeetaskRepository extends CrudRepository<Employeetaskmaste
 	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE employeetaskid = ?1")
 	Employeetaskmaster getEmployeetask(Integer emptaskid);
 	
-	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster")
-	List<Employeetaskmaster> getAllEmployeetask();
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster LIMIT ?1, 10")
+	List<Employeetaskmaster> getAllEmployeetask(Integer index);
 	
-	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE LOWER(taskstatus) = LOWER('pending')")
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE trim(LOWER(taskstatus)) = trim(LOWER('pending'))")
 	List<Employeetaskmaster> getAllEmployeependingtask();
 	
-	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE taskdeadline < DATE(NOW()) AND LOWER(taskstatus) = LOWER('pending')")
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE trim(LOWER(taskstatus)) = trim(LOWER('completed'))")
+	List<Employeetaskmaster> getAllEmployeecompletedtask();
+	
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE trim(LOWER(taskstatus)) = trim(LOWER('pending')) AND employeetaskempid =  ?1")
+	List<Employeetaskmaster> getAllEmployeependingtaskByEmpid(Integer empid);
+
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE trim(LOWER(taskstatus)) = trim(LOWER('completed')) AND employeetaskempid =  ?1")
+	List<Employeetaskmaster> getEmployeeCompletedtaskByEmpid(Integer empid);
+	
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE taskdeadline < DATE(NOW()) AND trim(LOWER(taskstatus)) = trim(LOWER('pending')) AND employeetaskempid = ?1")
+	List<Employeetaskmaster> getAllEmployeependingtaskCrossedDeadlineByEmpid(Integer empid); 
+	
+	@Query(nativeQuery = true, value = "SELECT count(employeetaskid) from employeetaskmaster where trim(LOWER(taskstatus)) = trim(LOWER('pending'))")
+	Integer countTotalNoOfPendingTasks();
+	
+	@Query(nativeQuery = true, value = "SELECT count(employeetaskid) from employeetaskmaster where trim(LOWER(taskstatus)) = trim(LOWER('completed'))")
+	Integer countTotalNoOfCompletedTasks();
+	
+	@Query(nativeQuery = true, value = "SELECT count(employeetaskid) from employeetaskmaster where trim(LOWER(taskstatus)) = trim(LOWER('pending')) AND employeetaskempid = ?1")
+	Integer countTotalNoOfPendingTasksByEmpid(Integer empid);
+	
+	@Query(nativeQuery = true, value = "SELECT count(employeetaskid) from employeetaskmaster where trim(LOWER(taskstatus)) = trim(LOWER('completed')) AND employeetaskempid = ?1")
+	Integer countTotalNoOfCompletedTasksEmpid(Integer empid);
+	
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE taskdeadline < DATE(NOW()) AND trim(LOWER(taskstatus)) = trim(LOWER('pending'))")
 	List<Employeetaskmaster> getAllEmployeependingtaskByDeadline();
 	
-	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE employeetaskempid = ?1")
-	List<Employeetaskmaster> getEmployeetaskByEmpid(Integer empid);
+	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE employeetaskempid = ?1 LIMIT ?2, 10")
+	List<Employeetaskmaster> getEmployeetaskByEmpid(Integer empid, Integer index);
 	
 }

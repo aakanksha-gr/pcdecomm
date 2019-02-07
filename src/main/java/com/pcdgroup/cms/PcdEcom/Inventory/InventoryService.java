@@ -6,7 +6,7 @@ public interface InventoryService {
 
 	public String createInventory(Inventorymaster inventorymaster);
 	public Inventorymaster getInventory(Integer inventoryid);
-	public List<Inventorymaster> getAllInventory();
+	public List<Inventorymaster> getAllInventory(Integer index);
 	public String deleteInventory(Integer inventoryid);
 	public String updateInventory(Inventorymaster inventorymaster, Integer inventoryid);
 	public List<Inventorymaster> getAllOutofstockInventory();

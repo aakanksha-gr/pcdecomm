@@ -18,8 +18,8 @@ public interface TaskRepository extends CrudRepository<Taskmaster, Integer> {
 	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster WHERE taskid = ?1")
 	List<Taskmaster> getAllTaskByTaskId(Integer taskid);
 	
-	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster")
-	List<Taskmaster> getAllTask();
+	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster LIMIT ?1, 10")
+	List<Taskmaster> getAllTask(Integer index);
 	
 	@Query(nativeQuery = true, value = "SELECT taskid, taskname, taskduraton, brand, tasktype, taskprocesstype FROM taskmaster WHERE LOWER(trim(brand = LOWER(trim(?1)))) AND LOWER(trim(tasktype = LOWER(trim(?2)))) LIMIT ?3, 10")
 	List<Taskmaster> getTaskByWorkingArea(String brand, String tasktype, Integer index);

@@ -15,8 +15,8 @@ public interface InventoryRepository extends CrudRepository<Inventorymaster, Int
 	@Query(nativeQuery = true, value = "SELECT inventoryid, inventoryname, inventorybrand, inventorylocation, inventoryquantity, inventorymimimumstock, inventorystock, inventorystockstatus, inventoryhsncode, inventorygst FROM inventorymaster WHERE inventoryid = ?1")
 	Inventorymaster getInventory(Integer inventoryid);
 	
-	@Query(nativeQuery = true, value = "SELECT inventoryid, inventoryname, inventorybrand, inventorylocation, inventoryquantity, inventorymimimumstock, inventorystock, inventorystockstatus, inventoryhsncode, inventorygst FROM inventorymaster")
-	List<Inventorymaster> getAllInventory();
+	@Query(nativeQuery = true, value = "SELECT inventoryid, inventoryname, inventorybrand, inventorylocation, inventoryquantity, inventorymimimumstock, inventorystock, inventorystockstatus, inventoryhsncode, inventorygst FROM inventorymaster LIMIT ?1, 10")
+	List<Inventorymaster> getAllInventory(Integer index);
 	
 	@Query(nativeQuery = true, value = "SELECT inventoryid, inventoryname, inventorybrand, inventorylocation, inventoryquantity, inventorymimimumstock, inventorystock, inventorystockstatus, inventoryhsncode, inventorygst FROM inventorymaster "
 			+ "WHERE LOWER(trim(inventorystockstatus)) = LOWER(trim('out of stock'))")
@@ -25,5 +25,8 @@ public interface InventoryRepository extends CrudRepository<Inventorymaster, Int
 	@Query(nativeQuery = true, value = "SELECT inventoryid, inventoryname, inventorybrand, inventorylocation, inventoryquantity, inventorymimimumstock, inventorystock, inventorystockstatus, inventoryhsncode, inventorygst FROM inventorymaster "
 			+ "WHERE LOWER(trim(inventorybrand)) = LOWER(trim(?1)) LIMIT 10")
 	List<Inventorymaster> getAllInventoryByBrand(String brand);
+	
+	@Query(nativeQuery = true, value = "SELECT inventoryid, inventoryname, inventorybrand, inventorylocation, inventoryquantity, inventorymimimumstock, inventorystock, inventorystockstatus, inventoryhsncode, inventorygst FROM inventorymaster WHERE inventoryid = ?1")
+	List<Inventorymaster> getInventoryList(Integer invid);
 	
 }

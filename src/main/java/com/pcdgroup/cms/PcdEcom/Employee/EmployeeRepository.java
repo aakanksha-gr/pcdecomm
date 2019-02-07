@@ -18,8 +18,8 @@ public interface EmployeeRepository extends CrudRepository<Employeemaster, Integ
 	@Query(nativeQuery = true, value = "SELECT employeeid, employeefname, employeelname, employeedesignation, employeeworkingbrand, employeeworkingtype, employeeemail, employeepassword, employeecontactno, employeeaddress FROM employeemaster WHERE LOWER(trim(employeeemail)) = LOWER(trim(?1)) and employeeid <> ?2")
 	Employeemaster checkDuplicateEmail(String email, Integer employeeid);
 	
-	@Query(nativeQuery = true, value = "SELECT employeeid, employeefname, employeelname, employeedesignation, employeeworkingbrand, employeeworkingtype, employeeemail, employeepassword, employeecontactno, employeeaddress FROM employeemaster")
-	List<Employeemaster> getAllEmploiees();
+	@Query(nativeQuery = true, value = "SELECT employeeid, employeefname, employeelname, employeedesignation, employeeworkingbrand, employeeworkingtype, employeeemail, employeepassword, employeecontactno, employeeaddress FROM employeemaster LIMIT ?1, 10")
+	List<Employeemaster> getAllEmploiees(Integer index);
 	
 	@Query(nativeQuery = true, value = "SELECT employeeid, employeefname, employeelname, employeedesignation, employeeworkingbrand, employeeworkingtype, employeeemail, employeepassword, employeecontactno, employeeaddress FROM employeemaster WHERE LOWER(trim(employeeworkingbrand)) = LOWER(trim(?1)) LIMIT 10")
 	List<Employeemaster> getAllEmploieesByBrand(String brand);

@@ -15,8 +15,8 @@ public interface VendorRepository extends CrudRepository<Vendormaster, Integer> 
 	@Query(nativeQuery = true, value = "SELECT vendorid, vendorfname, vendorlname, vendorproductbrand, vendoremail, vendorcontactno, vendoraddress, vendorpassword FROM vendormaster WHERE vendorid = ?1")
 	Vendormaster getVendorDetails(Integer vendorid);
 	
-	@Query(nativeQuery = true, value = "SELECT vendorid, vendorfname, vendorlname, vendorproductbrand, vendoremail, vendorcontactno, vendoraddress, vendorpassword FROM vendormaster")
-	List<Vendormaster> getAllVendorsDetails();
+	@Query(nativeQuery = true, value = "SELECT vendorid, vendorfname, vendorlname, vendorproductbrand, vendoremail, vendorcontactno, vendoraddress, vendorpassword FROM vendormaster LIMIT ?1, 10")
+	List<Vendormaster> getAllVendorsDetails(Integer index);
 	
 	@Query(nativeQuery = true, value = "SELECT vendorid, vendorfname, vendorlname, vendorproductbrand, vendoremail, vendorcontactno, vendoraddress, vendorpassword FROM vendormaster WHERE vendoremail = ?1")
 	Vendormaster checkDuplicateEmail(String email);

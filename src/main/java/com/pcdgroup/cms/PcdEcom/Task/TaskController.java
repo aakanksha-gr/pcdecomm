@@ -43,10 +43,10 @@ public class TaskController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getAllTask")
-	public List<?> getAllTask() {
+	@RequestMapping(method=RequestMethod.GET, value="/getAllTask/{index}")
+	public List<?> getAllTask(@PathVariable Integer index) {
 		
-		return taskServiceImpl.getAllTasks();
+		return taskServiceImpl.getAllTasks(index);
 		
 	}
 	

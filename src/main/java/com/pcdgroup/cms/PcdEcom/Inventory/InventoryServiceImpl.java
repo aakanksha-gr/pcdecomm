@@ -73,13 +73,13 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public List<Inventorymaster> getAllInventory() {
+	public List<Inventorymaster> getAllInventory(Integer index) {
 		
 		try {
 			
-			if(null != inventoryRepository.getAllInventory() && inventoryRepository.getAllInventory().size() > 0) {
+			if(null != inventoryRepository.getAllInventory(index) && inventoryRepository.getAllInventory(index).size() > 0) {
 				
-				return inventoryRepository.getAllInventory();
+				return inventoryRepository.getAllInventory(index);
 				
 			}
 			
@@ -134,14 +134,14 @@ public class InventoryServiceImpl implements InventoryService {
 			if(null != inventoryid) {
 				
 				inventorymaster.setInventoryid(inventoryid);
-				
+				 
 				if( Integer.valueOf(inventorymaster.getInventorystock()) <= Integer.valueOf(inventorymaster.getInventorymimimumstock())) {
 					
-					inventorymaster.setInventorystockstatus(Integer.valueOf(inventorymaster.getInventorymimimumstock()) - Integer.valueOf(inventorymaster.getInventorystock())+" Items less for minimum Stock");
+					inventorymaster.setInventorystockstatus("out of Stock");
 					
 				} else {
 					
-					inventorymaster.setInventorystockstatus(Integer.valueOf(inventorymaster.getInventorystock())+" Intems avilable in stock");
+					inventorymaster.setInventorystockstatus("Stock avilable");
 					
 				}
 				
@@ -160,6 +160,82 @@ public class InventoryServiceImpl implements InventoryService {
 		
 		return "Something wents wrong..!";
 	
+	}
+	
+	public String updateProductInventory( Inventorymaster inventorymaster,
+			Integer inventoryid, String inventoryname, String inventorybrand, String inventorylocation,
+			String inventoryquantity, String inventorymimimumstock, String inventoryhsncode, String inventorygst, 
+			String inventorystock, Integer productquantity) {
+		
+		try {
+		
+			if(null != inventoryid) {
+				
+				inventorymaster.setInventoryid(inventoryid);
+				
+				if(null != inventoryname) {
+					inventorymaster.setInventoryname(inventoryname);
+				}
+				
+				if(null != inventorybrand) {
+					inventorymaster.setInventorybrand(inventorybrand);
+				}
+				
+				if(null != inventorylocation) {
+					inventorymaster.setInventorylocation(inventorylocation);
+				}
+				
+				if(null != inventoryquantity) {
+					inventorymaster.setInventoryquantity(inventoryquantity);
+				}
+
+				if(null != inventorymimimumstock) {
+					inventorymaster.setInventorymimimumstock(inventorymimimumstock);
+				}
+				
+				if(Integer.parseInt(inventorystock) > productquantity) {
+					
+					inventorymaster.setInventorystock(String.valueOf(Integer.parseInt(inventorystock) - productquantity));
+					
+				} else {
+					
+					inventorymaster.setInventorystock(String.valueOf(productquantity - Integer.parseInt(inventorystock)));
+					
+				}
+				
+				if( Integer.valueOf(inventorymaster.getInventorystock()) <= Integer.valueOf(inventorymaster.getInventorymimimumstock())) {
+					
+					inventorymaster.setInventorystockstatus("out of stock");
+					
+				} else {
+					
+					inventorymaster.setInventorystockstatus("Stock avilable");
+					
+				}
+				
+				if(null != inventoryhsncode) {
+					inventorymaster.setInventoryhsncode(inventoryhsncode);
+				}
+				
+				if(null != inventorygst) {
+					inventorymaster.setInventorygst(inventorygst);
+				}
+				
+				inventoryRepository.save(inventorymaster);
+			
+				return "product inventory stock updated..!";
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		
+		return null;
+
 	}
 
 	@Override

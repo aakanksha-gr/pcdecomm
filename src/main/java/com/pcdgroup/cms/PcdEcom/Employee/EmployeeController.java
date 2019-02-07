@@ -52,10 +52,10 @@ public class EmployeeController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployees")
-	public List<?> getAllEmployees() {
+	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployees/{index}")
+	public List<?> getAllEmployees(@PathVariable Integer index) {
 		
-		return employeeServiceImpl.getAllEmploiees();
+		return employeeServiceImpl.getAllEmploiees(index);
 		
 	}
 	

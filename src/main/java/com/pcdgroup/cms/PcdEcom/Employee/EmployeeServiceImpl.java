@@ -129,13 +129,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employeemaster> getAllEmploiees() {
+	public List<Employeemaster> getAllEmploiees(Integer index) {
 		
 		try {
 			
-			if(null != employeeRepository.getAllEmploiees() && employeeRepository.getAllEmploiees().size() > 0) {
+			if(null != employeeRepository.getAllEmploiees(index) && employeeRepository.getAllEmploiees(index).size() > 0) {
 				
-				return employeeRepository.getAllEmploiees();
+				return employeeRepository.getAllEmploiees(index);
 				
 			}
 			

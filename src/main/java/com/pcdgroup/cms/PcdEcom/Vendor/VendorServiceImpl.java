@@ -78,13 +78,13 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
-	public List<Vendormaster> getAllVendors() {
+	public List<Vendormaster> getAllVendors(Integer index) {
 		
 		try {
 			
-			if(null != vendorRepository.getAllVendorsDetails()) {
+			if(null != vendorRepository.getAllVendorsDetails(index)) {
 					
-				return vendorRepository.getAllVendorsDetails();
+				return vendorRepository.getAllVendorsDetails(index);
 				
 			}
 			

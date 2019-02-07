@@ -9,7 +9,7 @@ public interface EmployeeService {
 	public Employeemaster employeeLogin(Employeemaster employeemaster, Employeeloginmaster employeeloginmaster);
 	public String createEmployee(Employeemaster employeemaster);
 	public Employeemaster getEmployee(Integer employeeid);
-	public List<Employeemaster> getAllEmploiees();
+	public List<Employeemaster> getAllEmploiees(Integer index);
 	public String deleteEmployee(Integer employeeid);
 	public String updateEmployee(Employeemaster employeemaster, Integer employeeid);
 	public List<?> getEmployeeByWorkingArea(String employeeworkingbrand, String employeeworkingtype, Integer index);
