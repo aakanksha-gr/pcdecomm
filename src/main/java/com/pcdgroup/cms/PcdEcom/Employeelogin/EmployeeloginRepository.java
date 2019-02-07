@@ -14,5 +14,8 @@ public interface EmployeeloginRepository extends CrudRepository<Employeeloginmas
 	
 	@Query(nativeQuery = true, value = "SELECT employeeliginid, empid, servicestartingtime, location FROM employeeloginmaster ORDER BY employeeliginid DESC LIMIT ?1, 10")
 	List<Employeeloginmaster> getAllLoginDetails(Integer index);
-	
+
+	@Query(nativeQuery = true, value = "SELECT employeeliginid, empid, servicestartingtime, location FROM employeeloginmaster WHERE empid = ?1 ORDER BY employeeliginid DESC LIMIT ?2, 10")
+	List<Employeeloginmaster> getEmployeeLoginDetailsByEmpid(Integer empid, Integer index);
+
 }
