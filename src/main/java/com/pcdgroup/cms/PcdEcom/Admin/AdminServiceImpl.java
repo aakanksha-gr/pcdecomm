@@ -21,9 +21,9 @@ public class AdminServiceImpl implements AdminService {
 		
 			passwordsecurity = new Passwordsecurity();
 			
-			if(null != adminRepository.checkAdminLogin(adminmaster.getAdminemail(), passwordsecurity.encrypt(adminmaster.getAdminpassword()))) {
+			if(null != adminRepository.checkAdminLogin(adminmaster.getAdminemail().toLowerCase().trim(), passwordsecurity.encrypt(adminmaster.getAdminpassword().toLowerCase().trim()))) {
 				
-				return adminRepository.checkAdminLogin(adminmaster.getAdminemail(), passwordsecurity.encrypt(adminmaster.getAdminpassword()));
+				return adminRepository.checkAdminLogin(adminmaster.getAdminemail().toLowerCase().trim(), passwordsecurity.encrypt(adminmaster.getAdminpassword().toLowerCase().trim()));
 				
 			}
 			
