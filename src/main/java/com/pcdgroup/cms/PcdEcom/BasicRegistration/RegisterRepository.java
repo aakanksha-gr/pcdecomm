@@ -14,7 +14,7 @@ public interface RegisterRepository extends CrudRepository<Registermaster, Integ
 	@Query(nativeQuery = true, value = "Delete from registermaster where id = ?1")
 	Integer deleteUr(Integer id);
 	
-	@Query(nativeQuery = true, value = "Select rid, fname, lname, email, mobileno, password, confirmpassword from registermaster where email = ?1 and password = ?2")
+	@Query(nativeQuery = true, value = "Select rid, fname, lname, email, mobileno, password, confirmpassword from registermaster where LOWER(trim(email)) = ?1 and LOWER(trim(password)) = ?2")
 	Registermaster loginid(String email, String password);
 	
 	@Query(nativeQuery = true, value = "Select rid, fname from registermaster where LOWER(email) = LOWER(?1) and rid <> ?2")

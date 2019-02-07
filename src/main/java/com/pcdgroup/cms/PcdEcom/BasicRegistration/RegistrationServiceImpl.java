@@ -47,7 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		try {
 			
 			passwordsecurity = new Passwordsecurity();
-			Registermaster loginUserDetailsList = registerRepository.loginid(registermaster.getEmail(), passwordsecurity.encrypt(registermaster.getPassword()));
+			Registermaster loginUserDetailsList = registerRepository.loginid(registermaster.getEmail().toLowerCase().trim(), passwordsecurity.encrypt(registermaster.getPassword().toLowerCase().trim()));
 			
 			if(loginUserDetailsList != null) {
 			
