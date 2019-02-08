@@ -50,5 +50,13 @@ public interface EmployeetaskRepository extends CrudRepository<Employeetaskmaste
 	
 	@Query(nativeQuery = true, value = "SELECT employeetaskid, employeetaskempid, taskidemployeetask, taskdatetime, taskdeadline, taskstatus FROM employeetaskmaster WHERE employeetaskempid = ?1 LIMIT ?2, 10")
 	List<Employeetaskmaster> getEmployeetaskByEmpid(Integer empid, Integer index);
+
+	
+	@Query(nativeQuery = true, value = "SELECT e.employeetaskid, e.employeetaskempid, e.taskidemployeetask, e.taskdatetime, e.taskdeadline, e.taskstatus, "
+			+ "t.taskname "
+			+ " FROM employeetaskmaster e "
+			+ "INNER JOIN taskmaster t ON t.taskid = e.taskidemployeetask "
+			+ "WHERE employeetaskempid = ?1 LIMIT ?2, 10")
+	List<?> getTaskdetailsByEmpid(Integer empid, Integer index);
 	
 }

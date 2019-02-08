@@ -20,5 +20,6 @@ public interface EmployeetaskService {
 	public Integer countTotalNoOfCompletedTasks();
 	public List<?> getEmployeecompletedByEmpid(Integer empid);
 	public List<?> getAllEmployeeCompletedtasks();
+	public List<?> getTaskdetailsByEmpid(Integer empid, Integer index);
 	
 }

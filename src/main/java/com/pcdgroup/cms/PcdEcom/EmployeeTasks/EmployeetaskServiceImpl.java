@@ -446,4 +446,35 @@ public class EmployeetaskServiceImpl implements EmployeetaskService {
 		return null;
 	}
 
+	@Override
+	public List<?> getTaskdetailsByEmpid(Integer empid, Integer index) {
+		
+		List<?> taskdetailsByEmpid;
+		
+		try {
+			
+			taskdetailsByEmpid = new ArrayList<>();
+			
+			if(null != empid && null != index) {
+			
+				taskdetailsByEmpid = employeetaskRepository.getTaskdetailsByEmpid(empid, index);
+				
+				if(null != taskdetailsByEmpid && taskdetailsByEmpid.size() > 0) {
+					
+					return taskdetailsByEmpid;
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e);
+			
+		}
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

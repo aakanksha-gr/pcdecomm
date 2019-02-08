@@ -36,6 +36,13 @@ public class EmployeetaskController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/getTaskdetailsByEmpid/{empid}/{index}")
+	public List<?> getTaskdetailsByEmpid(@PathVariable Integer empid, @PathVariable Integer index) {
+		
+		return employeetaskServiceImpl.getTaskdetailsByEmpid(empid, index);
+		
+	}
+	
 	@RequestMapping(method=RequestMethod.GET, value="/getAllEmployeetask/{index}")
 	public List<?> getAllEmployeetask(@PathVariable Integer index) {
 		
